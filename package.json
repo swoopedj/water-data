@@ -1,0 +1,26 @@
+{
+  "name": "water-data",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/swoopedj/water-data.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/swoopedj/water-data/issues"
+  },
+  "homepage": "https://github.com/swoopedj/water-data#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "es6-promise": "^3.2.1",
+    "express": "^4.14.0",
+    "morgan": "^1.7.0"
+  }
+}

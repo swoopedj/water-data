@@ -74,6 +74,18 @@ select {
   color: #D3F2F5;
 }
 
+.site-card {
+  color: #E2F4FC;
+  font-family: calibri,helvetica,sans-serif;
+  padding: 5px;
+  text-align: center;
+  width: 30%;
+  background-color: rgba(0, 114, 20, 0.75);
+  border-radius: 10px;
+  font-size: 1em;
+  margin: 0 auto 15px auto;
+}
+
 @media (max-width: 500px) {
 
   .main-title {
@@ -105,4 +117,6 @@ dark blue: 045978
 darker blue: #00455E ?;
 lightblue: #82C9CB
 yellow: BF8800
+light green: 52CF68, 2EC248
+dark green: 007214
 */

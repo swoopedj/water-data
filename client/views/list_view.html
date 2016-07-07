@@ -1,0 +1,10 @@
+<div class="view-wrapper">
+  <div class="results-container" ng-repeat="site in resultsCtrl.siteList">
+    <a ng-href="/" ng-click="resultsCtrl.getSiteDataById(site.siteId)">
+      <div class="site-card">
+        <div class="site-id">{{site.siteName}}</div>
+
+      </div>
+    </a>
+  </div>
+</div>

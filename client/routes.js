@@ -15,10 +15,17 @@ angular.module('waterData')
       controller: 'searchCtrl',
       controllerAs:'searchCtrl'
     })
-    // .state('results', {
-    //   url: 'results',
-    //   templateUrl: 'views/results_view.html',
-    //   controller: 'resultsCtrl'
-    // })
+    .state('list', {
+      url: '/list',
+      templateUrl: 'views/list_view.html',
+      controller: 'listCtrl',
+      controllerAs: 'listCtrl'
+    })
+    .state('site', {
+      url: '/site',
+      templateUrl: 'views/site_view.html',
+      controller: 'siteCtrl',
+      controllerAs: 'siteCtrl'
+    })
   
 })

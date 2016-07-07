@@ -5,7 +5,7 @@ router.get('/address/:address', function(req, res){
   console.log('In data-api, GET address')
   var coordinates = Search.getLatLongCoordinates(req.params.address)
   .then(function(response){
-    console.log('Address Response: ', response.geometry)
+    console.log('Address Response: ', response)
     res.send(response);
   })
 }); 

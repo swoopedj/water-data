@@ -10,13 +10,13 @@ angular.module('waterData.services', [])
       console.log('Error in services: ', err)
     })
     .then(function(resp){
-      console.log('RESPONSE: ', resp)
-      return resp.data;
+      console.log('RESPONSE in services: ', resp.data.results[0].geometry.location)
+      // getSitesInArea(resp, radius)
+      return resp.data.results[0].geometry.location;
     });
   };
 
-  var getSitesInArea = function(coords){
-    var bBox = coords;
+  var getSitesInArea = function(bBox){
     return $http({
       method: 'GET',
       url:'/api/bBox/' + bBox
@@ -51,3 +51,11 @@ angular.module('waterData.services', [])
   }
 
 })
+.service('SiteService', function(){
+  this.site = '';
+  this.siteArray = '';
+})
+
+
+
+

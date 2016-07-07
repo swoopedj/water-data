@@ -3,8 +3,6 @@ var Path = require('path');
 var morgan = require('morgan');
 require('es6-promise').polyfill();
 var routes = express.Router();
-// var browserify = require('browserify-middleware');
-
 
 var data_api = require('./api/data-api.js')
 
@@ -18,25 +16,8 @@ var angular = Path.resolve(__dirname, '../node_modules/')
 routes.use('/scripts', express.static(angular));
 
 
-// var app = express();
-
-// app.get('/scripts/app-bundle.js',
-//   browserify('./client/app.js'));
-
-// var assetFolder = Path.resolve(__dirname, '../client')
-// app.use(express.static('client'));
-
-// app.get('/*', function(req, res){
-//   res.sendFile( assetFolder + '/index.html' )
-// })
-
-// var port = process.env.PORT || 8080;
-// app.listen(port);
-// console.log("Listening on port", port);
-
-
 // api routes
-// routes.use('/api', data_api);
+routes.use('/api', data_api);
 
 if(process.env.NODE_ENV !== 'test'){
   routes.get('/*', function(request, response){

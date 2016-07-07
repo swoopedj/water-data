@@ -12,7 +12,8 @@ angular.module('waterData')
     .state('search', {
       url: '/search',
       templateUrl: 'views/search_view.html',
-      controller: 'searchCtrl'
+      controller: 'searchCtrl',
+      controllerAs:'searchCtrl'
     })
     // .state('results', {
     //   url: 'results',

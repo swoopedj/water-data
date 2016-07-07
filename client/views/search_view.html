@@ -1,0 +1,34 @@
+<div class="view-wrapper">
+  <div class="search-wrapper">
+    <form class="address-form" ng-model="address">
+      <strong>Street</strong>
+      <input type="text" id="address-street" ng-model="address.street"><br>
+      <strong>City</strong>
+      <input type="text" id="address-city" ng-model="address.city"><br>
+      <strong>State</strong>
+      <input type="text" id="address-state" ng-model="address.state" maxlength="2" style="width: 15px"><br>
+      <strong>Proximity</strong>
+      <select name='radius' id="location-radius" ng-model="address.proximity">
+        <option value="1" selected="selected">1 mile</option>
+        <option value="2">2 miles</option>
+        <option value="3">3 miles</option>
+        <option value="5">5 miles</option>
+        <option value="10">10 miles</option>
+        <option value="25">25 miles</option>
+      </select>
+      <!-- <input type="button" id="google-button" value="Submit"> -->
+      <!-- <br> -->
+      <button class="search-button" ng-click="searchCtrl.getLatLong(address)">Search</button>
+    </form>
+    <br>
+    <h2> OR </h2>
+    <form class="address-form">
+      <strong>Enter USGS Site Id:</strong>
+      <input type="text" id="site-id">
+      <!-- <input type="button" id="usgs-button" value="Submit"> -->
+      <br>
+      <button class="search-button">Submit</button>
+    </form>
+
+  </div>
+</div>

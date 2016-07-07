@@ -1,42 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="waterData">
 <head>
   <meta charset="utf-8">
-  <!-- <script src='/scripts/app-bundle.js'></script> -->
+  <title>Stream Watch</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link href='public/styles.css' rel='stylesheet'>
 </head>
 <body>
-  <form>
-    <label>Enter address:</label>
-    <input type="text" id="address-street">
-    <input type="text" id="address-city">
-    <input type="text" id="address-state" maxlength="2">
-    <select name='radius' id="location-radius">
-      <option value="1">1 mile</option>
-      <option value="2">2 miles</option>
-      <option value="3">3 miles</option>
-      <option value="5">5 miles</option>
-      <option value="10">10 miles</option>
-      <option value="25">25 miles</option>
-    <input type="button" id="google-button" value="Submit">
-  </form>
-  <h2>Google location data:</h2>
-  <div class="address-data"></div>
-
-  <br>
-  <br>
-  <form>
-    <label>Enter site Id:</label>
-    <input type="text" id="site-id">
-    <input type="button" id="usgs-button" value="Submit">
-  </form>
-  <h2>USGS Data:</h2>
-  <div class='site-data'></div>
-
-  <div class = "results">
+  <div class="main-title-wrapper">
+    <a href="#/" class="button-link"><h2 class="main-title">Stream Watch</h2></a>
+  </div>
+  <div class='main-wrapper'>
+    <div ui-view>
+    </div>
   </div>
   <footer>
-    <script src='/scripts/app-bundle.js'></script>
+    <script src="/scripts/angular/angular.js"></script>
+    <script src="/scripts/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="app.js"></script>
+    <script src="routes.js"></script>
+    <script src="controllers/home_controller.js"></script>
+    <script src="controllers/search_controller.js"></script>
+    <script src="services.js"></script>
+
   </footer>
-  
 </body>
 </html>

@@ -37,7 +37,7 @@ select {
   border-color: #014159;
   margin: 15px;
   font-size: 2em;
-  background-color: #008B34;
+  background-color: #01505B;
   color: #D3F2F5;
 }
 .main-title{
@@ -70,7 +70,7 @@ select {
   border-radius: 5px;
   border-color: #014159;
   font-size: 1em;
-  background-color: #008B34;
+  background-color: #01505B;
   color: #D3F2F5;
 }
 
@@ -80,7 +80,8 @@ select {
   padding: 5px;
   text-align: center;
   width: 30%;
-  background-color: rgba(0, 114, 20, 0.75);
+  background-color: rgba(1, 80, 91, 0.75);
+  border: 1px solid #E2F4FC;
   border-radius: 10px;
   font-size: 1em;
   margin: 0 auto 15px auto;
@@ -99,7 +100,7 @@ select {
     border-color: #014159;
     margin: 15px;
     font-size: 1em;
-    background-color: #008B34;
+    background-color: #01505B;
     color: #D3F2F5;
   }
 }

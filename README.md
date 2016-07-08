@@ -21,8 +21,6 @@ Currently the mobile geolocation function has yet to be implemented.
 
 ####Notes on Data Parameters:
 
-https://en.wikipedia.org/wiki/Haversine_formula
-
 Gage Height - 
 Gage height is measured in tenths of a foot and indicates the height of the water in relation to the site’s datum, an arbitrary point below the stream bed.
 

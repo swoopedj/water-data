@@ -54,6 +54,7 @@ angular.module('waterData.services', [])
 .service('SiteService', function(){
   this.site = '';
   this.siteArray = '';
+  this.originCoordinates = {};
 })
 
 

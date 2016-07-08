@@ -1,12 +1,7 @@
 angular.module('waterData.search', [])
-.controller('searchCtrl', function($scope, Search){
-  console.log('searchController in operation');
+.controller('searchCtrl', function($scope, $location, Search, SiteService){
+  // console.log('searchController in operation');
   var controller = this;
-  var address = {
-    street: document.getElementById("address-street").value || '',
-    city: document.getElementById("address-city").value,
-    state: document.getElementById("address-state").value
-  };
  
   this.getSitesByLatLong = function(address){
     console.log('getLatLong Called!')
@@ -15,7 +10,7 @@ angular.module('waterData.search', [])
     Search.getLatAndLong(address)
     .then(function(coordinates){
       console.log('Coordinates: ', coordinates)
-
+      SiteService.originCoordinates = {lat: coordinates.lat, lng: coordinates.lng}
       var longitude_constant = 0.018315;
       var latitude_constant = 0.014492;
       var bBox = {
@@ -38,13 +33,8 @@ angular.module('waterData.search', [])
       return Search.getSitesInArea(bBox)
     })
     .then(function(site_list){
-      console.log('Site List: ')
-      var siteList = site_list.value.timeSeries;
-      for(var i=0; i<siteList.length; i++){
-        var site = siteList[i]
-        console.log(site.sourceInfo.siteName, ': ')
-        console.log(site.variable.variableName, '= ', site.values[0].value[0].value)
-      }
+      SiteService.siteArray = site_list.value.timeSeries
+      $location.path('/list')
 
     })
 
@@ -60,8 +50,8 @@ angular.module('waterData.search', [])
 
   }
 
-  this.getDataBySiteId = function(site_id){
+  // this.getDataBySiteId = function(site_id){
 
-  }
+  // }
 
 })

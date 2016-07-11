@@ -1,15 +1,12 @@
 angular.module('waterData.search', [])
 .controller('searchCtrl', function($scope, $location, Search, SiteService){
-  // console.log('searchController in operation');
   var controller = this;
  
   this.getSitesByLatLong = function(address){
-    console.log('getLatLong Called!')
-    var radius = address.proximity
+    var radius = address.proximity || 2
     var address = address.street + ',' + address.city + ',' + address.state    
     Search.getLatAndLong(address)
     .then(function(coordinates){
-      console.log('Coordinates: ', coordinates)
       SiteService.originCoordinates = {lat: coordinates.lat, lng: coordinates.lng}
       var longitude_constant = 0.018315;
       var latitude_constant = 0.014492;
@@ -20,13 +17,9 @@ angular.module('waterData.search', [])
         north: coordinates.lat + (radius * latitude_constant)
       }
       var westLong = round(bBox.west).toString()
-      // console.log('westLong: ', westLong)
       var southLat = round(bBox.south).toString()
-      // console.log('southLat: ', southLat)
       var eastLong = round(bBox.east).toString()
-      // console.log('eastLong: ', eastLong)
       var northLat = round(bBox.north).toString()
-      console.log('northLat: ', northLat)
 
       var bBox = westLong + ',' + southLat + ',' + eastLong + ',' + northLat; 
 

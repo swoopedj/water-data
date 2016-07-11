@@ -1,17 +1,14 @@
 angular.module('waterData.services', [])
 .factory('Search', function($http){
   var getLatAndLong = function(address){
-    console.log('getLatLong Called! Address: ', address)
     return $http({
       method: 'GET',
       url: '/api/address/' + address
     })
     .catch(function(err){
-      console.log('Error in services: ', err)
+      console.log('Error: ', err)
     })
     .then(function(resp){
-      console.log('RESPONSE in services: ', resp.data.results[0].geometry.location)
-      // getSitesInArea(resp, radius)
       return resp.data.results[0].geometry.location;
     });
   };
@@ -22,10 +19,9 @@ angular.module('waterData.services', [])
       url:'/api/bBox/' + bBox
     })
     .catch(function(err){
-      console.log('Error in services: ', err)
+      console.log('Error: ', err)
     })
     .then(function(resp){
-      console.log('RESPONSE: ', resp)
       return resp.data;
     });
   }
@@ -36,10 +32,9 @@ angular.module('waterData.services', [])
       url:'/api/siteId/' + id
     })
     .catch(function(err){
-      console.log('Error in services: ', err)
+      console.log('Error: ', err)
     })
     .then(function(resp){
-      console.log('RESPONSE: ', resp)
       return resp.data;
     });
   }

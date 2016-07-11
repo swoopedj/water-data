@@ -3,6 +3,8 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 50%;
+  padding: 0;
+  margin: 0;
 }
 
 a:link {
@@ -78,13 +80,28 @@ select {
   color: #E2F4FC;
   font-family: calibri,helvetica,sans-serif;
   padding: 5px;
-  text-align: center;
-  width: 30%;
+  text-align: left;
+  width: 50%;
   background-color: rgba(1, 80, 91, 0.75);
   border: 1px solid #E2F4FC;
   border-radius: 10px;
   font-size: 1em;
   margin: 0 auto 15px auto;
+}
+
+.site-id {
+  width: 70%;
+}
+
+.site-distance {
+  color: #F27807;
+  opacity: 0.7;
+  font-style: italic;
+  float: right;
+}
+
+.site-parameter {
+  color: #72c4c2;
 }
 
 @media (max-width: 500px) {
@@ -103,6 +120,10 @@ select {
     background-color: #01505B;
     color: #D3F2F5;
   }
+
+  .site-card {
+    width: 80%;
+  }
 }
 
 @media (max-height: 400px) {
@@ -118,6 +139,7 @@ dark blue: 045978
 darker blue: #00455E ?;
 lightblue: #82C9CB
 yellow: BF8800
+orange: F27807;
 light green: 52CF68, 2EC248
 dark green: 007214
 */

@@ -17,8 +17,6 @@ angular.module('waterData.list', [])
     siteObj.parameterArray = [siteObj.parameter]
 
     siteObj.distFromOrigin = distance(SiteService.originCoordinates, siteObj.site_coordinates)
-    console.log('SITESERVE ORIGIN: ', SiteService.originCoordinates)
-    console.log('SITE COORDS: ', siteObj.site_coordinates)
     if(siteObj.parameter.code === '00060'){
       siteObj.parameter.param_name = 'Stream Flow: ';
       siteObj.parameter.param_unit = 'ft.\u00B3/sec.';
@@ -46,8 +44,18 @@ angular.module('waterData.list', [])
     listArray.push(listObj[key])
   }
 
-  this.siteList = listArray
-  console.log('Site List: ', this.siteList)
+  listArray.sort(function(a, b){
+    if(a.distFromOrigin > b.distFromOrigin){
+      return 1
+    }
+    if(a.distFromOrigin < b.distFromOrigin){
+    
+      return -1
+    } else {return 0}
+
+  })
+
+  this.siteList = listArray;
 
   function getSiteDataById(id){
     console.log('ID: ', id)
@@ -62,6 +70,7 @@ angular.module('waterData.list', [])
     dist = Math.acos(dist)
     dist = dist * 180/Math.PI
     dist = dist * 60 * 1.1515
+    dist = Math.round(dist * 10) / 10
     return dist
   }
 

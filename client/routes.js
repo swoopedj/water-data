@@ -1,5 +1,5 @@
 angular.module('waterData')
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
   
   $urlRouterProvider.otherwise('/');
 
@@ -27,5 +27,8 @@ angular.module('waterData')
       controller: 'siteCtrl',
       controllerAs: 'siteCtrl'
     })
+
+  $locationProvider.html5Mode(true);
+  $locationProvider.hashPrefix('');
   
 })

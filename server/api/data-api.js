@@ -16,6 +16,7 @@ router.get('/bBox/:bBox', function(req, res){
 });
 
 router.get('/siteId/:id', function(req, res){
+  console.log(req.params.id)
   var data = Search.getDataBySiteId(req.params.id)
   .then(function(response){
     res.send(response);

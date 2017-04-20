@@ -15,6 +15,13 @@ router.get('/bBox/:bBox', function(req, res){
   })
 });
 
+router.get('/geo-bBox', function(req, res){
+  var results = Search.getSitesInBoundaryBox(req.query)
+  .then(function(response){
+    res.send(response);
+  })
+});
+
 router.get('/siteId/:id', function(req, res){
   console.log(req.params.id)
   var data = Search.getDataBySiteId(req.params.id)

@@ -7,7 +7,7 @@ angular.module('waterData.search', [])
     var address = address.street + ',' + address.city + ',' + address.state    
     Search.getLatAndLong(address)
     .then(function(coordinates){
-      SiteService.originCoordinates = {lat: coordinates.lat, lng: coordinates.lng}
+      SiteService.originCoordinates = {lat: coordinates.lat, long: coordinates.long}
       var longitude_constant = 0.018315;
       var latitude_constant = 0.014492;
       var bBox = {

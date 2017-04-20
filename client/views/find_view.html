@@ -1,7 +1,7 @@
 <div class="view-wrapper">
   <div class="find-wrapper">
     <form class="find-form" ng-model="location">
-      <select name='radius' id="location-radius" ng-model="location.proximity">
+      <select name='radius' id="location-radius" ng-model="location.radius">
         <option value="1" selected="selected">1 mile</option>
         <option value="2">2 miles</option>
         <option value="3">3 miles</option>
@@ -9,7 +9,7 @@
         <option value="10">10 miles</option>
         <option value="25">25 miles</option>
       </select>
-      <button class="search-button" ng-click="findCtrl.getLocation(geolocation)">Find</button>
+      <button class="search-button" ng-click="findCtrl.getLocation(location)">Find</button>
     </form>
     <p id="find-message"></p>
   </div>

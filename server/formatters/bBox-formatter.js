@@ -1,11 +1,14 @@
 module.exports = function(coordinates) {
   var longitude_constant = 0.018315;
   var latitude_constant = 0.014492;
+  var radius = coordinates.radius;
+  var lat = coordinates.lat;
+  var long = coordinates.long;
   var bBox = {
-    west: coordinates.lng - (radius * longitude_constant),
-    south: coordinates.lat - (radius * latitude_constant),
-    east: coordinates.lng + (radius * longitude_constant),
-    north: coordinates.lat + (radius * latitude_constant)
+    west: long - (radius * longitude_constant),
+    south: lat - (radius * latitude_constant),
+    east: long + (radius * longitude_constant),
+    north: lat + (radius * latitude_constant)
   }
   var westLong = round(bBox.west).toString()
   var southLat = round(bBox.south).toString()

@@ -1,18 +1,13 @@
 <div class="view-wrapper">
-<h1> List View! </h1>
   <div class="results-container" ng-repeat="site in listCtrl.siteList">
-    <a ng-href="/" ng-click="listCtrl.getSiteDataById(site.site_id)">
-      <div class="site-card">
-        <div class="site-distance">{{site.distFromOrigin}} mi</div>
-        <div class="site-id">{{site.site_name}}</div>
- 
-        <div class="site-params" ng-repeat="parameter in site.parameterArray">
-          <div class='site-parameter'>{{parameter.param_name}}
-          {{parameter.value}} {{parameter.param_unit}}
-          </div>
+    <div class="site-card">
+      <div class="site-distance">{{site.distFromOrigin}} mi</div>
+      <div class="site-id">{{site.site_name}}</div>
+      <div class="site-params" ng-repeat="parameter in site.parameterArray">
+        <div class='site-parameter'>{{parameter.param_name}}
+        {{parameter.value}} {{parameter.param_unit}}
         </div>
-
       </div>
-    </a>
+    </div>
   </div>
 </div>

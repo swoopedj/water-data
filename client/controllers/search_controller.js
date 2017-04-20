@@ -43,8 +43,4 @@ angular.module('waterData.search', [])
 
   }
 
-  // this.getDataBySiteId = function(site_id){
-
-  // }
-
 })

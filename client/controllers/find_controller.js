@@ -14,10 +14,13 @@ angular.module('waterData.find', [])
 
   var getArea = function(radius) {
     return function(position) {
+      console.log(position.coords)
       SiteService.originCoordinates = {lat: position.coords.latitude, long: position.coords.longitude} 
       Search.findSitesInArea(position.coords, radius)
       .then(function(data){
-        console.log("DATA: ", data)
+        console.log("SITES: ", data.value.timeSeries)
+        SiteService.siteArray = data.value.timeSeries
+        $location.path('/list')
       }) 
     }
   }

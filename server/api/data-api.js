@@ -16,7 +16,7 @@ router.get('/bBox/:bBox', function(req, res){
 });
 
 router.get('/geo-bBox', function(req, res){
-  var results = Search.getSitesInBoundaryBox(req.query)
+  var results = Search.findSitesInBoundaryBox(req.query)
   .then(function(response){
     res.send(response);
   })

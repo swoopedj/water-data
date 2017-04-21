@@ -57,6 +57,7 @@ angular.module('waterData.services', [])
   return{
     getLatAndLong: getLatAndLong,
     getSitesInArea: getSitesInArea,
+    findSitesInArea: findSitesInArea,
     getSiteData: getSiteData
   }
 

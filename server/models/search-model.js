@@ -25,12 +25,31 @@ Search.getLatLongCoordinates = function(address){
 
 
 // GET request to USGS for sites within Lat/Long boundary box
-Search.getSitesInBoundaryBox = function(coordinates){
+Search.findSitesInBoundaryBox = function(coordinates){
   var baseUrl =  'http://waterservices.usgs.gov/nwis/iv/?format=json,1.1&bBox='
   var formatted_bBox = bBox_formatter(coordinates);
-  console.log("formatted_bBox: ", formatted_bBox)
   var options = {
     url: baseUrl + formatted_bBox + '&parameterCd=00060,00065,00062',
+  };
+  console.log("options.url: ", options.url)
+  return new Promise(function(resolve, reject){
+    request.get(options, function(error, response, body){
+      if(error){
+        console.log('Error in server: ', error)
+        throw new Error(error)
+      } else {
+        response.body = JSON.parse(body);
+        console.log("RES: ", response.body)
+        resolve(response.body);
+      }
+    })
+  })
+}
+
+Search.getSitesInBoundaryBox = function(bBox){
+  var baseUrl =  'http://waterservices.usgs.gov/nwis/iv/?format=json,1.1&bBox='
+  var options = {
+    url: baseUrl + bBox + '&parameterCd=00060,00065,00062',
   };
   return new Promise(function(resolve, reject){
     request.get(options, function(error, response, body){

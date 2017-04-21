@@ -2,8 +2,10 @@ module.exports = function(coordinates) {
   var longitude_constant = 0.018315;
   var latitude_constant = 0.014492;
   var radius = coordinates.radius;
-  var lat = coordinates.lat;
-  var long = coordinates.long;
+  var lat = Number(coordinates.lat);
+  var long = Number(coordinates.long);
+  console.log("FORMATTER typeof: ", typeof lat)
+  console.log("FORMATTER typeof: ", typeof long)
   var bBox = {
     west: long - (radius * longitude_constant),
     south: lat - (radius * latitude_constant),

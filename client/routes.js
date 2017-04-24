@@ -15,6 +15,12 @@ angular.module('waterData')
       controller: 'searchCtrl',
       controllerAs:'searchCtrl'
     })
+    .state('find', {
+      url: '/find',
+      templateUrl: 'views/find_view.html',
+      controller: 'findCtrl',
+      controllerAs: 'findCtrl'
+    })
     .state('list', {
       url: '/list',
       templateUrl: 'views/list_view.html',

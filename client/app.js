@@ -1,6 +1,7 @@
 angular.module('waterData', [
   'ui.router',
   'waterData.search',
+  'waterData.find',
   'waterData.services',
   'waterData.list',
   'waterData.home'

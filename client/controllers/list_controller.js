@@ -64,7 +64,7 @@ angular.module('waterData.list', [])
   function distance(origin, site){
     var radlat1 = Math.PI * origin.lat/180
     var radlat2 = Math.PI * site.latitude/180
-    var theta = origin.lng-site.longitude
+    var theta = origin.long-site.longitude
     var radtheta = Math.PI * theta/180
     var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
     dist = Math.acos(dist)

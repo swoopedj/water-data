@@ -3,22 +3,26 @@ angular.module('waterData.find', [])
   var controller = this;
   var x = document.getElementById('find-message')
 
-  this.getLocation = function() {
+  this.getLocation = function(location) {
+    var getAreaWithRadius = getArea(location.radius);
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition, showError);
+        navigator.geolocation.getCurrentPosition(getAreaWithRadius, showError);
     } else { 
         x.innerHTML = "Geolocation is not supported by this browser.";
     }
   }
 
-  function showPosition(position) {
-    x.innerHTML = "Latitude: " + position.coords.latitude + 
-    "<br>Longitude: " + position.coords.longitude;
-    console.log(position.coords)
-
-    SiteService.originCoordinates = {lat: position.coords.lat, lng: position.coords.lng} 
-
-    // Search.getSitesInArea(position.coords)   
+  var getArea = function(radius) {
+    return function(position) {
+      radius = radius || 2;
+      const coords = {lat: position.coords.latitude, long: position.coords.longitude};
+      SiteService.originCoordinates = coords; 
+      Search.findSitesInArea(coords, radius)
+      .then(function(data){
+        SiteService.siteArray = data.value.timeSeries
+        $location.path('/list')
+      }) 
+    }
   }
 
   function showError(error) {

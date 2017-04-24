@@ -7,23 +7,10 @@ angular.module('waterData.search', [])
     var address = address.street + ',' + address.city + ',' + address.state    
     Search.getLatAndLong(address)
     .then(function(coordinates){
-      SiteService.originCoordinates = {lat: coordinates.lat, lng: coordinates.lng}
-      var longitude_constant = 0.018315;
-      var latitude_constant = 0.014492;
-      var bBox = {
-        west: coordinates.lng - (radius * longitude_constant),
-        south: coordinates.lat - (radius * latitude_constant),
-        east: coordinates.lng + (radius * longitude_constant),
-        north: coordinates.lat + (radius * latitude_constant)
-      }
-      var westLong = round(bBox.west).toString()
-      var southLat = round(bBox.south).toString()
-      var eastLong = round(bBox.east).toString()
-      var northLat = round(bBox.north).toString()
+      const coords = {lat: coordinates.lat, long: coordinates.lng};
+      SiteService.originCoordinates = coords;
 
-      var bBox = westLong + ',' + southLat + ',' + eastLong + ',' + northLat; 
-
-      return Search.getSitesInArea(bBox)
+      return Search.findSitesInArea(coords, radius)
     })
     .then(function(site_list){
       SiteService.siteArray = site_list.value.timeSeries

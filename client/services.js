@@ -13,10 +13,11 @@ angular.module('waterData.services', [])
     });
   };
 
-  var getSitesInArea = function(bBox){
+  var findSitesInArea = function(coords, radius){
     return $http({
       method: 'GET',
-      url:'/api/bBox/' + bBox
+      url: '/api/geo-bBox/',
+      params: {lat: coords.lat, long: coords.long, radius: radius}
     })
     .catch(function(err){
       console.log('Error: ', err)
@@ -41,7 +42,7 @@ angular.module('waterData.services', [])
 
   return{
     getLatAndLong: getLatAndLong,
-    getSitesInArea: getSitesInArea,
+    findSitesInArea: findSitesInArea,
     getSiteData: getSiteData
   }
 

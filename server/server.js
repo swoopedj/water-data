@@ -4,7 +4,7 @@ var morgan = require('morgan');
 require('es6-promise').polyfill();
 var routes = express.Router();
 
-var data_api = require('./api/data-api.js')
+var data_api = require('./api/data-api.js');
 
 routes.use(morgan('dev'));
 

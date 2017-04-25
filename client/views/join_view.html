@@ -1,0 +1,13 @@
+<div class="view-wrapper">
+  <div class="join-wrapper">
+    <form class="join-form" ng-model="join">
+      <strong>Username</strong>
+      <input type="text" id="username" ng-model="join.username"><br>
+      <strong>Email</strong>
+      <input type="email" id="email" ng-model="join.email"><br>
+      <strong>Password</strong>
+      <input type="text" id="password" ng-model="join.password"><br>
+      <button class="join-button" ng-click="joinCtrl.getJoinData(join)">Join</button>
+    </form>
+  </div>
+</div>

@@ -4,5 +4,7 @@ angular.module('waterData', [
   'waterData.find',
   'waterData.services',
   'waterData.list',
+  'waterData.login',
+  'waterData.join',
   'waterData.home'
   ]);

@@ -1,5 +1,7 @@
 var router = require('express').Router();
 var Search = require('../models/search-model.js');
+var db = require('./db_api.js');
+
 
 router.get('/address/:address', function(req, res){
   var coordinates = Search.getLatLongCoordinates(req.params.address)
@@ -23,11 +25,26 @@ router.get('/geo-bBox', function(req, res){
 });
 
 router.get('/siteId/:id', function(req, res){
-  console.log(req.params.id)
   var data = Search.getDataBySiteId(req.params.id)
   .then(function(response){
     res.send(response);
   })
 }); 
+
+router.get('/login', function(req, res){
+  var user = db.createUser(req.query)
+  .then(function(response){
+    console.log("RES: ", response)
+    res.send(response);
+  })
+});
+
+router.post('/register', function(req, res){
+  var user = db.createUser(req.query)
+  .then(function(response){
+    console.log("RES: ", response)
+    res.send(response);
+  })
+});
 
 module.exports = router;

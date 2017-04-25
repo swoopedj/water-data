@@ -1,5 +1,5 @@
 <div class="view-wrapper">
-  <div class="results-container" ng-repeat="site in listCtrl.siteList">
+  <div class="results-container" ng-repeat="site in listCtrl.siteList" ng-if="listCtrl.siteList.length">
     <div class="site-card">
       <div class="site-distance">{{site.distFromOrigin}} mi</div>
       <div class="site-id">{{site.site_name}}</div>
@@ -10,4 +10,5 @@
       </div>
     </div>
   </div>
+  <span ng-if="!listCtrl.siteList.length">There are no USGS gaging stations within the area you have designated.</span>
 </div>

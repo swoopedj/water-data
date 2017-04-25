@@ -47,10 +47,50 @@ angular.module('waterData.services', [])
   }
 
 })
+.factory('Login', function($http) {
+  var authenticateUser = function(loginInfo) {
+    return $http({
+      method: 'GET',
+      url: '/api/login/',
+      params: {username: login.username, password: login.password}
+    })
+    .catch(function(err){
+      console.log('Error: ', err)
+    })
+    .then(function(resp){
+      return resp.data;
+    });
+  }
+
+  return {
+    authenticateUser: authenticateUser
+  }
+})
+.factory('Join', function($http) {
+  var createUser = function(joinInfo) {
+    return $http({
+      method: 'POST',
+      url: '/api/register/',
+      params: {username: joinInfo.username, password: joinInfo.password, email: joinInfo.email}
+    })
+    .catch(function(err){
+      console.log('Error: ', err)
+    })
+    .then(function(resp){
+      return resp.data;
+    });
+  }
+
+  return {
+    createUser: createUser
+  }
+})
 .service('SiteService', function(){
   this.site = '';
   this.siteArray = '';
   this.originCoordinates = {};
+  this.loginData = {};
+  this.joinData = {};
 })
 
 

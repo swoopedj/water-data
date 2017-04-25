@@ -1,0 +1,11 @@
+<div class="view-wrapper">
+  <div class="login-wrapper">
+    <form class="login-form" ng-model="login">
+      <strong>Username</strong>
+      <input type="text" id="username" ng-model="login.username"><br>
+      <strong>Password</strong>
+      <input type="text" id="password" ng-model="login.password"><br>
+      <button class="login-button" ng-click="loginCtrl.getLoginData(login)">Login</button>
+    </form>
+  </div>
+</div>

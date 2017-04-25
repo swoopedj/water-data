@@ -33,6 +33,18 @@ angular.module('waterData')
       controller: 'siteCtrl',
       controllerAs: 'siteCtrl'
     })
+    .state('login', {
+      url: '/login',
+      templateUrl: 'views/login_view.html',
+      controller: 'loginCtrl',
+      controllerAs: 'loginCtrl'
+    })
+    .state('join', {
+      url: '/join',
+      templateUrl: 'views/join_view.html',
+      controller: 'joinCtrl',
+      controllerAs: 'joinCtrl'
+    })
 
   $locationProvider.html5Mode(true);
   $locationProvider.hashPrefix('');

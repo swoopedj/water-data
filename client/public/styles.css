@@ -11,7 +11,7 @@ a:link {
   text-decoration: none;
 }
 
-input[type=text] {
+input {
     background: transparent;
     border: none;
     border-bottom: 1px solid #D4EFF2;
@@ -67,7 +67,7 @@ select {
   margin: 10px;
 }
 
-.search-button {
+.search-button, .join-button, .login-button{
   font-family: calibri,helvetica,sans-serif;
   border-radius: 5px;
   border-color: #014159;

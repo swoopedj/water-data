@@ -27,3 +27,9 @@ CREATE TABLE user_sites (
   email BOOLEAN,
   text_msg BOOLEAN
 );
+
+CREATE TABLE user_sessions (
+  sid VARCHAR NOT NULL COLLATE "default",
+  sess json NOT NULL,
+  expire timestamp(6) NOT NULL
+);

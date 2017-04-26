@@ -20,7 +20,12 @@ router.get('/bBox/:bBox', function(req, res){
 router.get('/geo-bBox', function(req, res){
   var results = Search.findSitesInBoundaryBox(req.query)
   .then(function(response){
-    res.send(response);
+    //if sessionID exists, show details view option (add to response)
+    db.verifySession(req.sessionID)
+    .then(function(data) {
+      response.verified = data.sid ? true : false;
+      res.send(response);
+    })
   })
 });
 
@@ -40,6 +45,8 @@ router.get('/login', function(req, res){
 });
 
 router.post('/register', function(req, res){
+  console.log("SESSION: ", req.session)
+  console.log("sessionID: ", req.sessionID)
   var user = db.createUser(req.query)
   .then(function(response){
     console.log("RES: ", response)

@@ -1,6 +1,11 @@
 var express = require('express');
 var Path = require('path');
+var session = require('express-session');
+var pgSession = require('connect-pg-simple')(session);
+var pg = require('pg');
 var morgan = require('morgan');
+var env = require('node-env-file');
+env('./.env');
 require('es6-promise').polyfill();
 var routes = express.Router();
 
@@ -23,8 +28,19 @@ if(process.env.NODE_ENV !== 'test'){
 
   var app = express();
   app.use(require('body-parser').json())
+  app.use(session({
+    store: new pgSession({
+      pg: pg,
+      conString: process.env.DATABASE_URL,
+      tableName: 'user_sessions'
+    }),
+    secret: process.env.SESSION_SECRET,
+    resave: true,
+    saveUninitialized: true
+  }))
 
   app.use('/', routes)
+  
 
   var port = process.env.PORT || 8080;
   app.listen(port, function(){

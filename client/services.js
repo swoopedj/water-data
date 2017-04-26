@@ -23,6 +23,7 @@ angular.module('waterData.services', [])
       console.log('Error: ', err)
     })
     .then(function(resp){
+      console.log("RESP: ", resp)
       return resp.data;
     });
   }

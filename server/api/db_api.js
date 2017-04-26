@@ -18,5 +18,17 @@ db_api.createUser = function(login) {
 
 //authenticate user in db
 db_api.authUser = function() {
+  
+};
 
+db_api.verifySession = function(sessID) {
+  return new Promise(function(resolve, reject){
+    db.any('SELECT * FROM user_sessions WHERE sid = $1', [sessID])
+    .then(function(data) {
+        resolve(data[0]);
+    })
+    .catch(function(error) {
+        console.log("Error: ", error)
+    })
+  })
 };

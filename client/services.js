@@ -48,11 +48,11 @@ angular.module('waterData.services', [])
 
 })
 .factory('Login', function($http) {
-  var authenticateUser = function(loginInfo) {
+  var authenticateUser = function(loginData) {
     return $http({
       method: 'GET',
       url: '/api/login/',
-      params: {username: login.username, password: login.password}
+      params: {username: loginData.username, password: loginData.password}
     })
     .catch(function(err){
       console.log('Error: ', err)

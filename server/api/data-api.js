@@ -18,7 +18,10 @@ router.get('/bBox/:bBox', function(req, res){
 });
 
 router.get('/geo-bBox', function(req, res){
-  var results = Search.findSitesInBoundaryBox(req.query)
+  console.log("~~~~~~~~~~~~~~~~~~~~~~")
+  console.log("SID: ", req.sessionID)
+  console.log("SESSION: ", req.session)
+  var results = Search.findSitesInBoundaryBox(req.query, req.sessionID)
   .then(function(response){
     res.send(response);
   })
@@ -32,10 +35,13 @@ router.get('/siteId/:id', function(req, res){
 }); 
 
 router.get('/login', function(req, res){
-  var user = db.createUser(req.query)
+  var user = db.authUser(req.query, req.sessionID)
   .then(function(response){
     console.log("RES: ", response)
     res.send(response);
+  })
+  .catch(error => {
+    console.log('ERROR:', error); // print the error;
   })
 });
 

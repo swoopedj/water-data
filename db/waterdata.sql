@@ -5,9 +5,10 @@ CREATE DATABASE waterdata;
 
 CREATE TABLE users (
   user_id SERIAL PRIMARY KEY,
-  user_name VARCHAR UNIQUE NOT NULL,
+  username VARCHAR UNIQUE NOT NULL,
   email VARCHAR UNIQUE NOT NULL,
   password VARCHAR NOT NULL,
+  current_session VARCHAR,
   active BOOLEAN
 );
 

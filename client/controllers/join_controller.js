@@ -6,7 +6,7 @@ angular.module('waterData.join', [])
     SiteService.joinData = userData;
     Join.createUser(userData)
     .then(function(data) {
-      console.log("DATA: ", data)
+      $location.path('/home')
     })
   }
 });

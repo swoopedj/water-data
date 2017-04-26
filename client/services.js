@@ -92,6 +92,7 @@ angular.module('waterData.services', [])
   this.originCoordinates = {};
   this.loginData = {};
   this.joinData = {};
+  this.userData = {};
 })
 
 

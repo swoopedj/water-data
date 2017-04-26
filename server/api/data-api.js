@@ -18,6 +18,8 @@ router.get('/bBox/:bBox', function(req, res){
 });
 
 router.get('/geo-bBox', function(req, res){
+  console.log("SESSION: ", req.session)
+  console.log("sessionID in bbox: ", req.sessionID)
   var results = Search.findSitesInBoundaryBox(req.query)
   .then(function(response){
     //if sessionID exists, show details view option (add to response)

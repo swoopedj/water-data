@@ -1,6 +1,7 @@
 <div class="view-wrapper">
   <div class="search-wrapper">
-    <form class="address-form" ng-model="address">
+    <h4>Enter an address to search near</h4>
+    <form class="text-input-form" ng-model="address">
       <strong>Street</strong>
       <input type="text" id="address-street" ng-model="address.street"><br>
       <strong>City</strong>
@@ -19,13 +20,20 @@
       <button class="search-button" ng-click="searchCtrl.getSitesByLatLong(address)">Search</button>
     </form>
     <br>
-    <h2> OR </h2>
-    <form class="address-form">
-      <strong>Enter USGS Site Id:</strong>
-      <input type="text" id="site-id">
-      <br>
-      <button class="search-button" ng-click="searchCtrl.getSitesByLatLong(address)">Submit</button>
-    </form>
-
+    <h4> Or search near current location </h4>
+    <div class="find-wrapper">
+      <form class="find-form" ng-model="location">
+        <select name='radius' id="location-radius" ng-model="location.radius">
+          <option value="1" selected="selected">1 mile</option>
+          <option value="2">2 miles</option>
+          <option value="3">3 miles</option>
+          <option value="5">5 miles</option>
+          <option value="10">10 miles</option>
+          <option value="25">25 miles</option>
+        </select>
+        <button class="search-button" ng-click="searchCtrl.getLocation(location)">Find</button>
+      </form>
+      <p id="find-message"></p>
+    </div>
   </div>
 </div>

@@ -39,6 +39,12 @@ angular.module('waterData')
       controller: 'loginCtrl',
       controllerAs: 'loginCtrl'
     })
+    .state('mysites', {
+      url: '/mysites',
+      templateUrl: 'views/mysites_view.html',
+      controller: 'mysitesCtrl',
+      controllerAs: 'mysitesCtrl'
+    })
     .state('join', {
       url: '/join',
       templateUrl: 'views/join_view.html',

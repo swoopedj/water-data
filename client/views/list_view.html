@@ -1,5 +1,5 @@
 <div class="view-wrapper">
-  <div class="results-container" ng-repeat="site in listCtrl.siteList">
+  <div class="results-container" ng-repeat="site in listCtrl.siteList" ng-if="listCtrl.siteList.length">
     <div class="site-card">
       <div class="site-distance">{{site.distFromOrigin}} mi</div>
       <div class="site-id">{{site.site_name}}</div>
@@ -8,6 +8,14 @@
         {{parameter.value}} {{parameter.param_unit}}
         </div>
       </div>
+      <a href="#" ng-click="listCtrl.saveSite(site)" ng-if="listCtrl.verifiedUser">Save to My Sites</a>
     </div>
+  </div>
+  <span ng-if="!listCtrl.siteList.length">There are no USGS gaging stations within the area you have designated.</span>
+  <div class"button-wrapper" ng-if="listCtrl.verifiedUser">
+    <a href="/mysites" class="button-link" ><button class="main-button">Go to My Sites</button></a>
+  </div>
+  <div class"button-wrapper" ng-if="!listCtrl.verifiedUser">
+    <a href="/login" class="button-link"><button class="main-button">Login</button></a>
   </div>
 </div>

@@ -1,7 +1,9 @@
-var request = require('request');
-var bBox_formatter = require('../formatters/bBox-formatter.js');
+const request = require('request');
+const bBox_formatter = require('../formatters/bBox-formatter.js');
+const site_formatter = require('../formatters/site_formatter.js');
+const param_combine = require('../formatters/parameter_consolidator.js');
 
-var Search = module.exports;
+const Search = module.exports;
 
 // GET request to Google Maps for Lat/Long coordinates of an address 
 Search.getLatLongCoordinates = function(address){  
@@ -25,9 +27,9 @@ Search.getLatLongCoordinates = function(address){
 
 
 // GET request to USGS for sites within Lat/Long boundary box
-Search.findSitesInBoundaryBox = function(coordinates){
+Search.findSitesInBoundaryBox = function(origin_coords){
   var baseUrl =  'http://waterservices.usgs.gov/nwis/iv/?format=json,1.1&bBox='
-  var formatted_bBox = bBox_formatter(coordinates);
+  var formatted_bBox = bBox_formatter(origin_coords);
   var options = {
     url: baseUrl + formatted_bBox + '&parameterCd=00060,00065,00062',
   };
@@ -36,10 +38,15 @@ Search.findSitesInBoundaryBox = function(coordinates){
       if(error){
         console.log('Error in server: ', error)
         throw new Error(error)
-      } else {
-        response.body = JSON.parse(body);
-        resolve(response.body);
       }
+
+      response.body = JSON.parse(body);
+      let site_list = response.body.value.timeSeries.map((site) => {
+        return site_formatter(site, origin_coords);
+      });
+
+      resolve(param_combine(site_list));
+      
     })
   })
 }

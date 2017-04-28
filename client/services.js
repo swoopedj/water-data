@@ -5,11 +5,11 @@ angular.module('waterData.services', [])
       method: 'GET',
       url: '/api/address/' + address
     })
-    .catch(function(err){
-      console.log('Error: ', err)
-    })
     .then(function(resp){
       return resp.data.results[0].geometry.location;
+    })
+    .catch(function(err){
+      console.log('Error: ', err)
     });
   };
 
@@ -19,13 +19,26 @@ angular.module('waterData.services', [])
       url: '/api/geo-bBox/',
       params: {lat: coords.lat, long: coords.long, radius: radius}
     })
+    .then(function(resp){
+      return resp.data;
+    })
     .catch(function(err){
       console.log('Error: ', err)
     })
+  }
+
+  var addToMySites = function(siteData, user_id, session_id){
+    return $http({
+      method: 'POST',
+      url: '/api/addSite/',
+      params: {site_id: siteData.site_id, user_id: user_id, session_id: session_id}
+    })
     .then(function(resp){
-      console.log("RESP: ", resp)
       return resp.data;
-    });
+    })
+    .catch(function(err){
+      console.log('Error: ', err)
+    })
   }
 
   var getSiteData = function(id){
@@ -33,34 +46,35 @@ angular.module('waterData.services', [])
       method: 'GET',
       url:'/api/siteId/' + id
     })
+    .then(function(resp){
+      return resp.data;
+    })
     .catch(function(err){
       console.log('Error: ', err)
     })
-    .then(function(resp){
-      return resp.data;
-    });
   }
 
   return{
     getLatAndLong: getLatAndLong,
     findSitesInArea: findSitesInArea,
-    getSiteData: getSiteData
+    getSiteData: getSiteData,
+    addToMySites: addToMySites
   }
 
 })
 .factory('Login', function($http) {
-  var authenticateUser = function(loginInfo) {
+  var authenticateUser = function(loginData) {
     return $http({
       method: 'GET',
       url: '/api/login/',
-      params: {username: login.username, password: login.password}
+      params: {username: loginData.username, password: loginData.password}
+    })
+    .then(function(resp){
+      return resp.data;
     })
     .catch(function(err){
       console.log('Error: ', err)
     })
-    .then(function(resp){
-      return resp.data;
-    });
   }
 
   return {
@@ -74,16 +88,35 @@ angular.module('waterData.services', [])
       url: '/api/register/',
       params: {username: joinInfo.username, password: joinInfo.password, email: joinInfo.email}
     })
+    .then(function(resp){
+      return resp.data;
+    })
     .catch(function(err){
       console.log('Error: ', err)
     })
-    .then(function(resp){
-      return resp.data;
-    });
   }
 
   return {
     createUser: createUser
+  }
+})
+.factory('MySites', function($http){
+  var listSites = function(user_id) {
+    return $http({
+      method: 'GET',
+      url: '/api/mySites',
+      params: {user_id: user_id}
+    })
+    .then(function(resp){
+      return resp.data;
+    })
+    .catch(function(err){
+      console.log('Error: ', err)
+    })
+  }
+
+  return {
+    listSites: listSites
   }
 })
 .service('SiteService', function(){

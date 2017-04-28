@@ -6,5 +6,7 @@ angular.module('waterData', [
   'waterData.list',
   'waterData.login',
   'waterData.join',
-  'waterData.home'
+  'waterData.mysites',
+  'waterData.home',
+  'ngCookies'
   ]);

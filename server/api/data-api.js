@@ -1,28 +1,28 @@
-var router = require('express').Router();
-var Search = require('../models/search-model.js');
-var db = require('./db_api.js');
+const router = require('express').Router();
+const Search = require('../models/search-model.js');
+const MySites = require('../models/mysites-model.js');
+const site_formatter = require('../formatters/site_formatter.js');
+const param_combine = require('../formatters/parameter_consolidator.js');
+const db = require('./db_api.js');
 
 
 router.get('/address/:address', function(req, res){
-  var coordinates = Search.getLatLongCoordinates(req.params.address)
+  let coordinates = Search.getLatLongCoordinates(req.params.address)
   .then(function(response){
     res.send(response);
   })
 }); 
 
 router.get('/bBox/:bBox', function(req, res){
-  var results = Search.getSitesInBoundaryBox(req.params.bBox)
+  let results = Search.getSitesInBoundaryBox(req.params.bBox)
   .then(function(response){
     res.send(response);
   })
 });
 
 router.get('/geo-bBox', function(req, res){
-  console.log("SESSION: ", req.session)
-  console.log("sessionID in bbox: ", req.sessionID)
-  var results = Search.findSitesInBoundaryBox(req.query)
+  let results = Search.findSitesInBoundaryBox(req.query)
   .then(function(response){
-    //if sessionID exists, show details view option (add to response)
     db.verifySession(req.sessionID)
     .then(function(data) {
       response.verified = data.sid ? true : false;
@@ -32,27 +32,45 @@ router.get('/geo-bBox', function(req, res){
 });
 
 router.get('/siteId/:id', function(req, res){
-  var data = Search.getDataBySiteId(req.params.id)
+  let data = Search.getDataBySiteId(req.params.id)
   .then(function(response){
     res.send(response);
   })
 }); 
 
 router.get('/login', function(req, res){
-  var user = db.createUser(req.query)
+  let user = db.authUser(req.query, req.sessionID)
   .then(function(response){
-    console.log("RES: ", response)
     res.send(response);
   })
 });
 
 router.post('/register', function(req, res){
-  console.log("SESSION: ", req.session)
-  console.log("sessionID: ", req.sessionID)
-  var user = db.createUser(req.query)
+  let user = db.createUser(req.query)
   .then(function(response){
-    console.log("RES: ", response)
     res.send(response);
+  })
+});
+
+router.post('/addSite', function(req, res){
+  let user = db.addToUserSites(req.query)
+  .then(function(response){
+    res.send(response);
+  })
+});
+
+router.get('/mySites', function(req, res){
+  console.log(req.query)
+  //
+  // add session verification here
+  //
+  let site_list = db.listUserSites(req.query.user_id)
+  .then(function(sub_list){
+    MySites.hydrateSiteData(sub_list)
+    .then(results => {
+      res.send(results);
+    })
+    
   })
 });
 

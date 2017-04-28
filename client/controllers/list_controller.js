@@ -1,79 +1,22 @@
 angular.module('waterData.list', [])
-.controller('listCtrl', function(SiteService, $location, $scope, Search){
-  var serviceArray = SiteService.siteArray
-  var listArray = []
-  var listObj = {}
+.controller('listCtrl', function(SiteService, $location, $scope, Search, $cookies){
+  var controller = this;
+  var siteList = SiteService.siteArray
+  let authData = $cookies.getObject('auth') ? JSON.parse($cookies.getObject('auth')) : null;
 
-  serviceArray.forEach(function(item){
-    var siteObj = {}
-    siteObj.site_id = item.sourceInfo.siteCode[0].value;
-    siteObj.site_name = item.sourceInfo.siteName;
-    siteObj.site_coordinates = item.sourceInfo.geoLocation.geogLocation;
-    siteObj.parameter = {
-      code: item.variable.variableCode[0].value,
-      value: item.values[0].value[0].value,
-      time: item.values[0].value[0].dateTime
-    }
-    siteObj.parameterArray = [siteObj.parameter]
+  this.verifiedUser = authData ? true : false;
 
-    siteObj.distFromOrigin = distance(SiteService.originCoordinates, siteObj.site_coordinates)
-    if(siteObj.parameter.code === '00060'){
-      siteObj.parameter.param_name = 'Stream Flow: ';
-      siteObj.parameter.param_unit = 'ft.\u00B3/sec.';
-    }
-    else if(siteObj.parameter.code === '00065'){
-      siteObj.parameter.param_name = 'Gage Height: ';
-      siteObj.parameter.param_unit = 'ft.';
-    }
-    else if(siteObj.parameter.code === '00062'){
-      siteObj.parameter.param_name = 'Reservoir Elevation: ';
-      siteObj.parameter.param_unit = 'ft.';
-    }
-
-    var idString = String(item.sourceInfo.siteCode[0].value)
-    
-    if(listObj[idString]){
-      listObj[idString].parameterArray.push(siteObj.parameter)
-    } else {
-      listObj[idString] = siteObj;
-    }    
-  })
-
-
-  for(var key in listObj){
-    listArray.push(listObj[key])
+  this.saveSite = function(site){
+    //send user_id, [session_id ?], and site_id to db, create new row in user_sites
+    Search.addToMySites(site, authData.user_id, authData.session_id)
+    .then(function(data){
+      console.log("DATA returned from addSite: ", data)
+    })
+    .catch(function(err){
+      console.log('Error: ', err)
+    })
   }
 
-  listArray.sort(function(a, b){
-    if(a.distFromOrigin > b.distFromOrigin){
-      return 1
-    }
-    if(a.distFromOrigin < b.distFromOrigin){
-    
-      return -1
-    } else {return 0}
-
-  })
-
-  this.siteList = listArray;
-
-  function getSiteDataById(id){
-    console.log('ID: ', id)
-  }
-
-  function distance(origin, site){
-    var radlat1 = Math.PI * origin.lat/180
-    var radlat2 = Math.PI * site.latitude/180
-    var theta = origin.long-site.longitude
-    var radtheta = Math.PI * theta/180
-    var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
-    dist = Math.acos(dist)
-    dist = dist * 180/Math.PI
-    dist = dist * 60 * 1.1515
-    dist = Math.round(dist * 10) / 10
-    return dist
-  }
-
-
+  this.siteList = siteList;
 
 })

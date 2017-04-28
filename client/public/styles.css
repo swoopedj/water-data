@@ -63,7 +63,7 @@ select {
   color: #00455E;
 }
 
-.address-form > input[type="text"] {
+.text-input-form > input[type="text"] {
   margin: 10px;
 }
 

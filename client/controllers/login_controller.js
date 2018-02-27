@@ -6,7 +6,6 @@ angular.module('waterData.login', [])
     SiteService.loginData = login;
     Login.authenticateUser(login)
     .then(function(data) {
-      console.log("DATA: ", data)
       if(data.user_id && data.current_session) {
         let auth = JSON.stringify({user_id: data.user_id, session_id: data.current_session});
         $cookies.putObject('auth', auth);

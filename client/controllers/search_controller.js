@@ -1,5 +1,5 @@
 angular.module('waterData.search', [])
-.controller('searchCtrl', function($scope, $location, Search, SiteService){
+.controller('searchCtrl', function($scope, $location, Search, Stats, SiteService){
   var controller = this;
   var x = document.getElementById('find-message')
  
@@ -34,10 +34,14 @@ angular.module('waterData.search', [])
       radius = radius || 2;
       const coords = {lat: position.coords.latitude, long: position.coords.longitude};
       SiteService.originCoordinates = coords; 
+
       Search.findSitesInArea(coords, radius)
       .then(function(site_list){
         SiteService.siteArray = site_list;
         $location.path('/list')
+      })
+      .then(function(site_list) {
+        Stats.getStats( )
       }) 
     }
   }

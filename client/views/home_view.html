@@ -1,11 +1,13 @@
 <div class="view-wrapper">
   <div class="home-wrapper">
-    <h3 class="home_label">Find Streamflow conditions at a USGS site near you!</h3>
     <div class"button-wrapper">
       <a href="/search" class="button-link"><button class="main-button">Find Streamflow Sites</button></a>
     </div>
-    <div class"button-wrapper">
+    <div class"button-wrapper" ng-if="!loggedIn">
       <a href="/login" class="button-link"><button class="main-button">Login</button></a>
+    </div>
+    <div class"button-wrapper" ng-if="loggedIn">
+      <a href="/home" ng-click="logout()" class="button-link"><button class="main-button">Logout</button></a>
     </div>
 
   </div>

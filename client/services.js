@@ -77,8 +77,24 @@ angular.module('waterData.services', [])
     })
   }
 
+  var verifySession = function(session_id) {
+    console.log("session_id: ", session_id)
+    return $http({
+      method: 'GET',
+      url: '/api/verify/',
+      params: {session_id: session_id}
+    })
+    .then(function(resp){
+      return resp.data;
+    })
+    .catch(function(err){
+      console.log('Error: ', err)
+    })
+  }
+
   return {
-    authenticateUser: authenticateUser
+    authenticateUser: authenticateUser,
+    verifySession: verifySession
   }
 })
 .factory('Join', function($http) {
@@ -114,18 +130,64 @@ angular.module('waterData.services', [])
       console.log('Error: ', err)
     })
   }
+  var logout = function(authData){
+    return $http({
+      method: 'DELETE',
+      url: '/api/logout',
+      params: {user_id: authData.user_id, session_id: authData.session_id}
+    })
+    .then(function(resp){
+      return resp.data;
+    })
+    .catch(function(err){
+      console.log('Error: ', err)
+    })
+  }
 
   return {
-    listSites: listSites
+    listSites: listSites,
+    logout: logout
   }
 })
-.service('SiteService', function(){
+.factory('Stats', function($http){
+  var getStats = function(site_id){
+    return $http({
+      method: 'GET',
+      url: '/api/stats',
+      params: {id: site_id}
+    })
+    .then(function(resp){
+      return resp.data;
+    })
+    .catch(function(err){
+      console.log('Error: ', err)
+    })
+  }
+
+  return {
+    getStats: getStats
+  }
+})
+.service('SiteService', function($http){
   this.site = '';
   this.siteArray = '';
   this.originCoordinates = {};
   this.loginData = {};
   this.joinData = {};
-  this.userData = {};
+  this.logout = function(authData){
+    console.log("authData: ", authData)
+    return $http({
+      method: 'DELETE',
+      url: '/api/logout',
+      params: {user_id: authData.user_id, session_id: authData.session_id}
+    })
+    .then(function(resp){
+      return resp.data;
+    })
+    .catch(function(err){
+      console.log('Error: ', err)
+    })
+  };
 })
 
 

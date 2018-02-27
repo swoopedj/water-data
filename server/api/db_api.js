@@ -73,6 +73,18 @@ db_api.listUserSites = function(user_id) {
   });
 }
 
+db_api.deleteSession = function(authData) {
+  return new Promise(function(resolve, reject){
+    db.any('SELECT * FROM user_sessions WHERE sid = $1', [authData.session_id])
+    .then(function(data) {
+      db.result('DELETE FROM user_sessions WHERE sid = $1 RETURNING sid', [authData.session_id])
+      .then(function(data) {
+        resolve(data)
+      })
+    })
+  });
+}
+
 
 
 

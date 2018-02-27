@@ -6,7 +6,6 @@ angular.module('waterData.mysites', [])
   function loadMySites (user_id) {
     MySites.listSites(user_id)
     .then(data => {
-      console.log("DATA FROM MYSITES get: ", data)
       $scope.siteList = data.site_list;
       if(!data.site_list.length) {
         $scope.noSites = true;
@@ -17,8 +16,19 @@ angular.module('waterData.mysites', [])
     })
   }
 
-  if(authData.user_id) {
+  if(authData) {
     loadMySites(authData.user_id);
+  }
+
+  this.logout = () => {
+    $cookies.remove('auth');
+    MySites.logout(authData)
+    .then(data => {
+      console.log("Logout data: ", data)
+    })
+    .catch(error => {
+      console.log("Error: ", error)
+    })
   }
 
 });

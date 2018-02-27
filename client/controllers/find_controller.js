@@ -4,7 +4,8 @@ angular.module('waterData.find', [])
   var x = document.getElementById('find-message')
 
   this.getLocation = function(location) {
-    var getAreaWithRadius = getArea(location.radius);
+    var radius = location && location.radius || 5;
+    var getAreaWithRadius = getArea(radius);
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(getAreaWithRadius, showError);
     } else { 

@@ -3,7 +3,7 @@ angular.module('waterData.search', [])
   var controller = this;
  
   this.getSitesByLatLong = function(address){
-    var radius = address.proximity || 2
+    var radius = address.proximity || 5
     var address = address.street + ',' + address.city + ',' + address.state    
     Search.getLatAndLong(address)
     .then(function(coordinates){
